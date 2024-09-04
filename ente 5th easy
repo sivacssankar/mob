@@ -1,0 +1,44 @@
+Button b1;
+    EditText t1,t2;
+    String tt1,tt2;
+    String names="name";
+    String password="pass";
+    SharedPreferences sh;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        t1=(EditText) findViewById(R.id.e1);
+        t2=(EditText) findViewById(R.id.e2);
+        b1=(Button) findViewById(R.id.button);
+        sh=getSharedPreferences("sivaa", Context.MODE_PRIVATE);
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tt1=t1.getText().toString();
+                tt2=t2.getText().toString();
+                SharedPreferences.Editor editor = sh.edit();
+                editor.putString("name",tt1);
+                editor.putString("pass",tt2);
+                editor.commit();
+                Intent i=new Intent(MainActivity.this,siva.class);
+                startActivity(i);
+            }        });    } }
+
+
+            public class siva extends AppCompatActivity {
+    TextView t1,t2;
+    String s1,s2;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_siva);
+        t1=(TextView) findViewById(R.id.tttt1);
+        t2=(TextView) findViewById(R.id.tttt2);
+        SharedPreferences sh=getSharedPreferences("sivaa", Context.MODE_PRIVATE);
+        s1=sh.getString("name","");
+        s2=sh.getString("pass","");
+        t1.setText(s1);
+        t2.setText(s2);
+    }
+}
